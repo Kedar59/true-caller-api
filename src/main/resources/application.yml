@@ -7,3 +7,13 @@ spring:
     mongodb:
       uri: mongodb+srv://kedar:${mongodb.password}@true-caller-api-test.hdcue.mongodb.net/
       database: trueCallerDB
+spring-doc:
+  api-docs:
+    groups:
+      enabled: true
+  swagger-ui:
+    operations-sorter: method
+    disable-swagger-default-url: true
+  writer-with-default-pretty-printer: true
+  default-produces-media-type: application/json
+  override-with-generic-response: true
