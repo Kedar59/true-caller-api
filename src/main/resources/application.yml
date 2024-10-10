@@ -1,0 +1,9 @@
+server:
+  port: 8083
+spring:
+  application:
+    name: truecaller
+  data:
+    mongodb:
+      uri: mongodb+srv://kedar:${mongodb.password}@true-caller-api-test.hdcue.mongodb.net/
+      database: trueCallerDB
