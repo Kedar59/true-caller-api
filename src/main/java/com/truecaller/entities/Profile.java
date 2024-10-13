@@ -7,7 +7,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
 
-@Document(collection="trueCallerAPI")
+@Document(collection="Profile")
 public class Profile {
     @Id
     private String id;
@@ -18,19 +18,41 @@ public class Profile {
     private String countryCode;
 
     private String name;
+    private boolean isVerified;
 
     private String location;
+    private int numberOfSpamCallReports;
+    private int numberOfSpamSMSReports;
 
     private Date timestamp;
-    public Profile() {}
-    public Profile(String phoneNumber, String countryCode, String name, String location) {
+
+    public Profile() {
+    }
+
+    public Profile(String id, String phoneNumber, String countryCode, String name,
+                   boolean isVerified, String location, int numberOfSpamCallReports,
+                   int numberOfSpamSMSReports, Date timestamp) {
+        this.id = id;
         this.phoneNumber = phoneNumber;
         this.countryCode = countryCode;
         this.name = name;
+        this.isVerified = isVerified;
         this.location = location;
-        this.timestamp = new Date();
+        this.numberOfSpamCallReports = numberOfSpamCallReports;
+        this.numberOfSpamSMSReports = numberOfSpamSMSReports;
+        this.timestamp = timestamp;
     }
+    public Profile(String phoneNumber,String countryCode,int numberOfSpamCallReports,int numberOfSpamSMSReports){
+        this.phoneNumber = phoneNumber;
+        this.countryCode = countryCode;
+        this.numberOfSpamCallReports = numberOfSpamCallReports;
+        this.numberOfSpamSMSReports = numberOfSpamSMSReports;
+        this.name = "UNKNOWN";
+        this.location = "UNKNOWN";
+        this.isVerified = false;
+        this.timestamp = new Date();
 
+    }
     public String getId() {
         return id;
     }
@@ -63,12 +85,36 @@ public class Profile {
         this.name = name;
     }
 
+    public boolean isVerified() {
+        return isVerified;
+    }
+
+    public void setVerified(boolean verified) {
+        isVerified = verified;
+    }
+
     public String getLocation() {
         return location;
     }
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public int getNumberOfSpamCallReports() {
+        return numberOfSpamCallReports;
+    }
+
+    public void setNumberOfSpamCallReports(int numberOfSpamCallReports) {
+        this.numberOfSpamCallReports = numberOfSpamCallReports;
+    }
+
+    public int getNumberOfSpamSMSReports() {
+        return numberOfSpamSMSReports;
+    }
+
+    public void setNumberOfSpamSMSReports(int numberOfSpamSMSReports) {
+        this.numberOfSpamSMSReports = numberOfSpamSMSReports;
     }
 
     public Date getTimestamp() {

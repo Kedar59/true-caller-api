@@ -10,14 +10,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 @RestController
-@RequestMapping("/api")
-public class ApiController {
+@RequestMapping("/profile")
+public class ProfileController {
     @Autowired
     private ProfileService profileService;
 
-    private Logger logger = LoggerFactory.getLogger(ApiController.class);
+    private Logger logger = LoggerFactory.getLogger(ProfileController.class);
 
     @PostMapping("/registerProfile")
     public ResponseEntity<Profile> registerProfile(@RequestBody Profile profile){
@@ -33,5 +35,11 @@ public class ApiController {
                 orElseThrow(() -> new ProfileNotFoundException("Profile with phone number : " + callerId.getCountryCode()
                         + " " + callerId.getNumber() + " not found."));
         return ResponseEntity.ok(profile);
+    }
+
+    @GetMapping("/searchByName/{name}")
+    public ResponseEntity<List<Profile>> searchByName(@PathVariable String name){
+        List<Profile> listOfPeople = profileService.searchProfilesByName(name);
+        return ResponseEntity.ok(listOfPeople);
     }
 }

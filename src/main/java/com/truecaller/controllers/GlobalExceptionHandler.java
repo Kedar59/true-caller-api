@@ -14,7 +14,8 @@ import java.time.LocalDateTime;
 public class GlobalExceptionHandler {
     @ExceptionHandler(ProfileNotFoundException.class)
     public ResponseEntity<?> handleProfileNotFoundException(ProfileNotFoundException exception){
-        ErrorResponse profileNotFound = new ErrorResponse(LocalDateTime.now(), exception.getMessage(), "Profile Not Found");
+        ErrorResponse profileNotFound = new ErrorResponse
+                (LocalDateTime.now(), exception.getMessage(), "Profile Not Found");
         return new ResponseEntity<>(profileNotFound, HttpStatus.NOT_FOUND);
     }
 }
