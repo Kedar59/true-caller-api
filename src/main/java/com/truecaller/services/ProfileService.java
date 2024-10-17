@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ProfileService {
-    void saveProfile(Profile profile);
+    Profile saveProfile(Profile profile);
 
     Optional<Profile> getProfileByPhoneNumber(String phoneNumber);
     Optional<Profile> getProfileByCallerID(String number,String CountryCode);

@@ -22,18 +22,18 @@ public class ProfileController {
     private Logger logger = LoggerFactory.getLogger(ProfileController.class);
 
     @PostMapping("/registerProfile")
-    public ResponseEntity<Profile> registerProfile(@RequestBody Profile profile){
-        profileService.saveProfile(profile);
-        return ResponseEntity.ok(profile);
+    public ResponseEntity<?> registerProfile(@RequestBody Profile profile){
+        Profile newProf = profileService.saveProfile(profile);
+        return ResponseEntity.ok(newProf);
     }
 
     @GetMapping("/getProfile")
     @ResponseBody
     public ResponseEntity<?> getProfile(@ModelAttribute CallerID callerId){
         logger.info("In api controller"+callerId.toString());
-        Profile profile = profileService.getProfileByCallerID(callerId.getNumber(),callerId.getCountryCode()).
-                orElseThrow(() -> new ProfileNotFoundException("Profile with phone number : " + callerId.getCountryCode()
-                        + " " + callerId.getNumber() + " not found."));
+        Profile profile = profileService.getProfileByCallerID(callerId.getNumber(),callerId.getCountryCode())
+                        .orElseThrow(() -> new ProfileNotFoundException("Profile with phone number : "
+                                + callerId.getCountryCode() + " " + callerId.getNumber() + " not found."));
         return ResponseEntity.ok(profile);
     }
 

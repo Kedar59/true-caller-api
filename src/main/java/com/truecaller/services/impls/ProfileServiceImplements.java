@@ -17,8 +17,8 @@ public class ProfileServiceImplements implements ProfileService {
     @Autowired
     private ProfileRepository repository;
     @Override
-    public void saveProfile(Profile profile) {
-        repository.save(profile);
+    public Profile saveProfile(Profile profile) {
+        return repository.save(profile);
     }
     private Logger logger = LoggerFactory.getLogger(ProfileServiceImplements.class);
     @Override

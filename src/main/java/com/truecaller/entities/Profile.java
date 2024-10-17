@@ -2,17 +2,21 @@ package com.truecaller.entities;
 
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.CompoundIndex;
+import org.springframework.data.mongodb.core.index.CompoundIndexes;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
 
 @Document(collection="Profile")
+@CompoundIndexes({
+        @CompoundIndex(name = "phone_country_unique", def = "{'phoneNumber': 1, 'countryCode': 1}", unique = true)
+})
 public class Profile {
     @Id
     private String id;
 
-    @Indexed(unique = true)
     private String phoneNumber;
 
     private String countryCode;
@@ -51,7 +55,6 @@ public class Profile {
         this.location = "UNKNOWN";
         this.isVerified = false;
         this.timestamp = new Date();
-
     }
     public String getId() {
         return id;

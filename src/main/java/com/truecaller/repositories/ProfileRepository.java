@@ -15,4 +15,5 @@ public interface ProfileRepository extends MongoRepository<Profile,String> {
 
     @Query("{ 'name': { $regex: ?0, $options: 'i' } }")
     List<Profile> findByNameContaining(String name);
+
 }
