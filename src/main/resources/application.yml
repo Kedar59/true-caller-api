@@ -17,3 +17,7 @@ spring-doc:
   writer-with-default-pretty-printer: true
   default-produces-media-type: application/json
   override-with-generic-response: true
+twilio:
+  AccountSID: ${twilio.AccountSID}
+  AuthToken: ${twilio.AuthToken}
+  phoneNumber: ${twilio.phoneNumber}
