@@ -3,6 +3,8 @@ package com.truecaller.controllers;
 import com.truecaller.entities.Profile;
 import com.truecaller.exceptions.ProfileNotFoundException;
 import com.truecaller.projections.CallerID;
+import com.truecaller.projections.ValidateOtpDTO;
+import com.truecaller.services.OtpService;
 import com.truecaller.services.ProfileService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,7 +20,8 @@ import java.util.List;
 public class ProfileController {
     @Autowired
     private ProfileService profileService;
-
+    @Autowired
+    private OtpService otpService;
     private Logger logger = LoggerFactory.getLogger(ProfileController.class);
 
     @PostMapping("/registerProfile")
@@ -26,7 +29,19 @@ public class ProfileController {
         Profile newProf = profileService.saveProfile(profile);
         return ResponseEntity.ok(newProf);
     }
-
+    @GetMapping("/getOtp")
+    @ResponseBody
+    public ResponseEntity<?> getOtp(@ModelAttribute CallerID callerID){
+        String mobileNumber = callerID.getCountryCode()+" "+callerID.getNumber();
+        String response = otpService.sendToPhone(mobileNumber);
+        return ResponseEntity.ok(response);
+    }
+    @PostMapping("/validate")
+    public ResponseEntity<?> validateOtp(@RequestBody ValidateOtpDTO validateOtp){
+        String response = otpService.validateOtp(validateOtp.getMobileNumber(),validateOtp.getOtp()) ?
+                "OTP verified" : "OTP incorrect";
+        return ResponseEntity.ok(response);
+    }
     @GetMapping("/getProfile")
     @ResponseBody
     public ResponseEntity<?> getProfile(@ModelAttribute CallerID callerId){
