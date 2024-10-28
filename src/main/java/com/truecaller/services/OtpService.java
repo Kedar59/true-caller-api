@@ -26,6 +26,13 @@ public class OtpService {
         return String.format("%6d",otp);
     }
     // send otp
+    public String sendToTelegram(String mobileNumber){
+        String otp = generateOtp();
+        long expirationTime = System.currentTimeMillis() + OTP_EXPIRATION_MILLIS;
+        OtpData otpData = new OtpData(otp, expirationTime);
+        otpStorage.put(mobileNumber, otpData);
+        return otp;
+    }
     public String sendToPhone(String mobileNumber){
         String otp = generateOtp();
         PhoneNumber reciepientPhoneNumber = new PhoneNumber(mobileNumber);

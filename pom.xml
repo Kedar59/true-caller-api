@@ -48,6 +48,19 @@
             <artifactId>twilio</artifactId>
             <version>9.16.0</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.telegram/telegrambots -->
+        <dependency>
+            <groupId>org.telegram</groupId>
+            <artifactId>telegrambots</artifactId>
+            <version>6.9.7.1</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.googlecode.libphonenumber/libphonenumber -->
+        <dependency>
+            <groupId>com.googlecode.libphonenumber</groupId>
+            <artifactId>libphonenumber</artifactId>
+            <version>8.13.45</version>
+        </dependency>
+
         <dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>

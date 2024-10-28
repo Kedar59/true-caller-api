@@ -21,3 +21,6 @@ twilio:
   AccountSID: ${twilio.AccountSID}
   AuthToken: ${twilio.AuthToken}
   phoneNumber: ${twilio.phoneNumber}
+telegram:
+  authToken: ${telegram.authToken}
+  username: ${telegram.username}
