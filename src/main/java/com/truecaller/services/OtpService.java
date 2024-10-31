@@ -23,7 +23,9 @@ public class OtpService {
     //generate OTP
     public String generateOtp(){
         int otp = (int)(Math.random()*1000000);
-        return String.format("%6d",otp);
+        String otpS = String.format("%6d",otp);
+        if(otpS.length()==5) otpS+="0";
+        return otpS;
     }
     // send otp
     public String sendToTelegram(String mobileNumber){
